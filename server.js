@@ -79,7 +79,7 @@ app.use(function (req, res, next) {
 
 
 // Listen port
-server.listen(PORT, () => {
+server.listen(PORT, "34.87.13.146 ", () => {
     console.log(`Liars-ask react listen on port ${PORT}`);
 })
 
