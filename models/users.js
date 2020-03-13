@@ -56,7 +56,8 @@ const userSchema = new Schema ({
         {
             chanelId: {
                 type: ObjectId,
-                ref: "chanels"
+                ref: "chanels",
+                unique: true
             },
             joinTime: {
                 type: Date,

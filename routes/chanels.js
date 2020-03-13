@@ -8,13 +8,15 @@ const {
     getChanelMessage,
     getChanelsJoined,
     postUserJoinChanelServer,
-    postChanelServerPushMember
+    postChanelServerPushMember,
+    findChanel
 } = require("../controllers/chanels");
 
 const  { requireSignin, isAdmin } = require("../controllers/auth");
 
 router.get("/", getChanels);
 router.get("/joined", getChanelsJoined);
+router.get("/find", findChanel);
 router.get("/:cid", getSingleChanel);
 router.get("/messages/:cid", getChanelMessage);
 

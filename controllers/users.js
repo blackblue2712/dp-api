@@ -12,7 +12,6 @@ cloudinary.config({
 
 module.exports.getUsers = (req, res) => {
     User.find( {}, (err, users) => {
-        console.log(err)
         if(err) return res.status(400).json( {message: "Error occur"} );
         return res.status(200).json(users);
     });

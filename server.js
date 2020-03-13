@@ -14,11 +14,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-// const morgan = require("morgan");
+const morgan = require("morgan");
 require('dotenv').config()
 
 // database
-mongoose.connect('mongodb://root:GcQZ4YtBvet9@34.92.196.206:27017/liars-ask?authSource=admin', {useUnifiedTopology: true, useNewUrlParser: true}, () => {
+mongoose.connect(process.env.DB_URI, {useUnifiedTopology: true, useNewUrlParser: true}, () => {
     console.log("Database connecting...");
 });
 mongoose.connection.on("error", (error) => {
@@ -42,7 +42,7 @@ const ytbRoute = require("./routes/youtube");
 
 // middleware
 app.use(cors());
-// app.use(morgan("dev"));
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static('public'));
