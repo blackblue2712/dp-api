@@ -25,6 +25,7 @@ class User {
 
     RemoveDisconnectdChanelUser(id) {
         let userDisconnect = this.GetUserById(id);
+        
         if(userDisconnect) {
             this.users = this.users.filter( u => u.sid !== id );
             return userDisconnect;

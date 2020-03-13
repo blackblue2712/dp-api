@@ -14,7 +14,9 @@ module.exports.postSignup = (req, res) => {
             user.email = email;
             user.password = password;
             user.save( (err, obj) => {
+                console.log(err)
                 if(err) {
+                    
                     return res.status(400).json( {message: `Error occur when create user, please try again`} );
                 }
                 user.salt = undefined;

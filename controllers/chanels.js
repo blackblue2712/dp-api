@@ -171,15 +171,3 @@ module.exports.postSaveChanelMessage = (req, res) => {
 
 }
 
-module.exports.findChanel = (req, res) => {
-    let { q } = req.query;
-    console.log(q)
-    Chanel
-        .find({
-            chanelName: new RegExp(q, "i")
-        })
-        .exec( (err, chanel) => {
-            if(err) return res.status(400).json({ message: "Error occur - get find chanels" });
-            return res.status(200).json(chanel);
-        });
-}

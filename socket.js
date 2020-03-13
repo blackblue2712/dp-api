@@ -3,16 +3,14 @@
  */
 
 let UserClass = require("./utilities/UserClass");
-let UserClassPM = require("./utilities/UsersPM");
 let users = new UserClass();
-let usersPM = new UserClassPM();
 let connectedIndividualUsers = {};
 let BOT_ID = "5d90866f6a1756647a6da758";
 let BOT_SOCKET = [];
 
 module.exports = (server) => {
     let io = require('socket.io')(server);
-    initializeSocket(io)
+    initializeSocket(io);
 }
 function initializeSocket(io) {
     io.on("connection", (socket) => {
@@ -93,22 +91,12 @@ function initializeSocket(io) {
             socket.uid = data.uid;
             connectedIndividualUsers[data.uid] = socket;
 
-            usersPM.AddConnectedUser(data.uid);
-
             cb();
-
-            socket.broadcast.emit("user-online", data.uid);
-            socket.emit("list-users-online", usersPM.GetConnectedUser())
         });
-
-        socket.on("user-offline", data => {
-            console.log("user-offline!!!!!!!!!!!!!!!!!!!!!!1", data)
-            usersPM.RemoveDisconnectedUser(data);
-            socket.broadcast.emit("user-offline", data);
-        })
 
         socket.on("client-send-message-from-individual-user", (data, cb) => {
             let { to, message, photo, from } = data;
+            console.log("***SEND***", data)
             if (connectedIndividualUsers.hasOwnProperty(to)) {
                 connectedIndividualUsers[to].emit("server-send-message-from-individual-user", {
                     message,                    // message of sender
@@ -122,6 +110,7 @@ function initializeSocket(io) {
         });
         socket.on("client-send-message-contain-image-from-individual-user", (data, cb) => {
             let { to, contentPhoto, photo, from } = data;
+            console.log("***SEND***", data)
             if (connectedIndividualUsers.hasOwnProperty(to)) {
                 connectedIndividualUsers[to].emit("server-send-message-contain-image-from-individual-user", {
                     contentPhoto,               // message of sender

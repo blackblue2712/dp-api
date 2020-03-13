@@ -16,8 +16,7 @@ const chanelSchema = new Schema({
     members: [
         {
             type: String,
-            ref: "users",
-            unique: true
+            ref: "users"
         }
     ],
     chanelCreated: {
