@@ -42,7 +42,7 @@ const ytbRoute = require("./routes/youtube");
 
 // middleware
 app.use(cors());
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static('public'));
