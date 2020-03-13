@@ -14,7 +14,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 require('dotenv').config()
 
 // database

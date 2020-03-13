@@ -28,7 +28,6 @@
     "yt-search": "^1.1.2"
   },
   "devDependencies": {
-    "morgan": "^1.9.1",
     "nodemon": "^1.19.3"
   }
 }
