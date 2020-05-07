@@ -62,6 +62,7 @@ module.exports.requestRelatedQuestionId = (req, res, next, id) => {
             }
         })
         .populate("tags", "_id name description count")
+        .populate("owner", "email _id")
         .exec( (err, ques) => {
             if(err || !ques) return res.status(200).json( {message: "Error occur (get single question)"} );
             req.quesInfo = ques;
