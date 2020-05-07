@@ -40,6 +40,7 @@ const notifyRoute = require("./routes/notify");
 const chanelRoute = require("./routes/chanels");
 const pmRoute = require("./routes/private-chat");
 const ytbRoute = require("./routes/youtube");
+const serachRoute = require("./routes/search");
 
 // middleware
 app.use(compression())
@@ -63,6 +64,7 @@ app.use("/notify", notifyRoute);
 app.use("/chanels", chanelRoute);
 app.use("/pm", pmRoute);
 app.use("/youtube", ytbRoute);
+app.use("/search", serachRoute);
 
 
 app.use( function(error, req, res, next) {

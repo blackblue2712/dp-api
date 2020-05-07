@@ -153,10 +153,21 @@ module.exports.putEditAcm = (req, res) => {
     acm.isImportant = isImportant;
     acm.anonymousTags = tagsnameArray;
     
-    acm.save( (err, result) => {
-        if(err) return res.status(400).json( {message: "Error occur (edit acm)", status: 400} );
-        return res.status(200).json( {message: "Done", status: 200, payload: result} );
-    });
+    let tagsNeedToReference = [];
+    Promise.all(
+        tagsnameArray.map( async tag => {
+            let data = await getTagIds(tag);
+            tagsNeedToReference = [...tagsNeedToReference, data];
+        })
+    )
+    .then( () => {
+        acm.tags = [];
+        tagsNeedToReference.map( t => acm.tags.push(t._id));
+        acm.save( (err, result) => {
+            if(err) return res.status(400).json( {message: "Error occur (edit acm)", status: 400} );
+            return res.status(200).json( {message: "Done", status: 200, payload: result} );
+        });
+    })
 }
 
 module.exports.deleteEditAcm = (req, res) => {

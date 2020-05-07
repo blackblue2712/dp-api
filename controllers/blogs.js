@@ -85,10 +85,21 @@ module.exports.putEditBlog = (req, res) => {
     let { title, body, tagsnameArray } = req.body;
     if(body) blog.body = body;
     blog.title = title;
-    blog.anonymousTags = tagsnameArray;
+    console.log(tagsnameArray)
 
-    blog.save( (err, result) => {
-        if(err) return res.status(400).json( {message: "Error occur (edit blog)"} )
-        return res.status(200).json( {message: "Done"} );
+    let tagsNeedToReference = [];
+    Promise.all(
+        tagsnameArray.map( async tag => {
+            let data = await getTagIds(tag);
+            tagsNeedToReference = [...tagsNeedToReference, data];
+        })
+    )
+    .then( () => {
+        blog.tags = [];
+        tagsNeedToReference.map( t => blog.tags.push(t._id));
+        blog.save( (err, result) => {
+            if(err) return res.status(400).json( {message: "Error occur (edit blog)"} )
+            return res.status(200).json( {message: "Done"} );
+        })
     })
 }

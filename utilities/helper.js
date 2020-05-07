@@ -8,9 +8,9 @@ module.exports.getTagIds = (tag) => {
     // )
     return new Promise( resolve => {
         let tagsNeedToReference = [];
-        Tags.findOne( {name: tag}, (err, rs) => {
+        Tags.findOne( {name: tag.toLowerCase()}, (err, rs) => {
             if(!rs) {
-                let newTag = new Tags({name: tag});
+                let newTag = new Tags({name: tag.toLowerCase()});
                 newTag.save( (err, newTagSaved) => {
                     tagsNeedToReference.push(newTagSaved._id)
                     resolve(newTagSaved);
