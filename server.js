@@ -2,6 +2,7 @@
 // express
 const express = require("express");
 const app = express();
+const compression = require("compression");
 const { createServer } = require("http");
 const socket = require("./socket");
 const server = createServer(app);
@@ -41,6 +42,7 @@ const pmRoute = require("./routes/private-chat");
 const ytbRoute = require("./routes/youtube");
 
 // middleware
+app.use(compression())
 app.use(cors());
 // app.use(morgan("dev"));
 app.use(bodyParser.json());
