@@ -103,3 +103,9 @@ module.exports.putEditBlog = (req, res) => {
         })
     })
 }
+
+module.exports.deleteBlog = async (req, res) => {
+    let { bid } = req.params;
+    await Blog.deleteOne({ _id: bid });
+    res.json({ message: "success" });
+}

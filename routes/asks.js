@@ -14,7 +14,8 @@ const {
     getYourQuestions,
     putUpdateQuestion,
     getSingleQuestionToEdit,
-    getSearchQuestions
+    getSearchQuestions,
+    deleteQuestion
 } = require("../controllers/asks");
 
 router.get("/questions", getQuestions);
@@ -26,6 +27,7 @@ router.get("/your-questions/", getYourQuestions);
 router.post("/new", requireSignin, postAsk);
 router.post("/answer/new", requireSignin, postAnswer, updateQuestionAfterPostAnswer);
 
+router.delete("/questions/delete/:qid", requireSignin, deleteQuestion);
 
 router.param("quesId", requestRelatedQuestionId);
 

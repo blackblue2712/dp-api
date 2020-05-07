@@ -88,7 +88,7 @@ module.exports.postAnswer = async (req, res, next) => {
 module.exports.getSingleQuestionToEdit = (req, res) => {
     let { uid } = req.query;
     let ques = req.quesInfo;
-    if(ques.owner != uid) {
+    if(ques.owner._id != uid) {
         return res.status(404).json( {message: 404} );
     } else {
         return res.status(200).json(ques);
@@ -138,4 +138,18 @@ module.exports.putUpdateQuestion = (req, res) => {
 
 module.exports.getAnswers = (req, res) => {
 
+}
+
+module.exports.deleteQuestion = async (req, res) => {
+    try {
+        let { qid } = req.params;
+        let answerArr = await Ques.findOne({ _id: qid }, "answers");
+        
+        await Answer.deleteMany({ _id: answerArr.answers.map(ans => ans._id) });
+        await Ques.deleteOne({ _id: qid });
+    
+        res.json({message: "success"});
+    } catch(err) {
+        console.log(err)
+    }
 }
