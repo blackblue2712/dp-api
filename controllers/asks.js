@@ -23,6 +23,15 @@ module.exports.postAsk = (req, res) => {
     })
 }
 
+
+module.exports.getSearchQuestions = (req, res) => {
+    Ques.find({ title: { $regex: ".*" + req.query.q + ".*", $options: "i" } })
+        .exec((err, ques) => {
+            if(err) return res.status(400).json( {message: "Error occur (get questions)"} );
+            return res.status(200).json( {message: `${ques.length} questions loaded`, payload: ques} );
+        })
+}
+
 module.exports.getQuestions = (req, res) => {
     Ques.find({})
         .sort({created: -1})
