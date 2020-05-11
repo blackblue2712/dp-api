@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --watch",
     "dev": "nodemon ./server.js localhost 8080"
   },
   "keywords": [],
@@ -29,7 +29,10 @@
     "yt-search": "^1.1.2"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2",
     "morgan": "^1.9.1",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "sinon": "^9.0.2"
   }
 }
