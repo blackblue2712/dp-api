@@ -38,6 +38,7 @@ module.exports.getAllBlogs = (req, res) => {
     Blog
     .find({})
     .populate("tags", "_id name count description")
+    .sort([["created", -1]])
     .exec( (err, blogs) => {
         if(err) return res.status(400).json( {message: "Error occur (get all blogs) " + err} );
         return res.status(200).json( blogs );
