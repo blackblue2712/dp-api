@@ -26,7 +26,7 @@ module.exports.getBlogs = (req, res) => {
     console.log(req.query, req.body);
     Blog.find({})
         .limit(Number(req.query.limit))
-        .sort( {created: -1} )
+        .sort([["created", -1]])
         .select("_id title")
         .populate("tags", "_id name count description")
         .exec( (err, blogs) => {
