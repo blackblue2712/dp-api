@@ -9,9 +9,6 @@ const blogSchema = new Schema({
         type: ObjectId,
         ref: "tags"
     }],
-    anonymousTags: [{
-        type: String
-    }],
     owner: {
         type: ObjectId,
         ref: "users"

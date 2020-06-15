@@ -3,7 +3,6 @@ const User = require("../models/users");
 const nodemailer = require("nodemailer");
 const { getTagIds } = require("../utilities/helper");
 
-
 module.exports.postAnnouncement = (req, res) => {
     /**
      * anonymous tag?

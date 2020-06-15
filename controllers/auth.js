@@ -65,7 +65,7 @@ module.exports.isAdmin = (req, res, next) => {
 }
 
 module.exports.isCanWriteAcm = (req, res, next) => {
-    console.log(req.payload)
+    console.log(req.payload) // no secure
     req.payload && Number(req.payload.roles) >= 1 ? next() : res.status(403).json( {message: "Permission deny"} ); 
 }
 
